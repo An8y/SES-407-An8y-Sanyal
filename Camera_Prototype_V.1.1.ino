@@ -109,7 +109,7 @@ void setup() {// Setup pins
 void loop() {//main loop
 
 // Read the incoming byte
-  int command = Serial.read();
+  char command = Serial.read();
 
   // Execute corresponding function based on command
   switch (command) {
