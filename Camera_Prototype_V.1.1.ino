@@ -114,40 +114,40 @@ void loop() {//main loop
   // Execute corresponding function based on command
   switch (command) {
     case '1':
-      Serial.println("Checking status...");
+      Serial.println("Checking status...\n");
       delay(1000);
       ShutterStatus();
       break;
     case '2':
-      Serial.println("Deploying Camera...");
+      Serial.println("Deploying Camera...\n");
       stepper.step(-STEPS/4);
       delay(500);
       break;
     case '3':
-      Serial.println("Closing Camera...");
+      Serial.println("Closing Camera...\n");
       stepper.step(STEPS/4);
       delay(500);
       break;
     case 'a':
-      Serial.println("Adjusting Camera by 45 deg CCW...");
+      Serial.println("Adjusting Camera by 45 deg CCW...\n");
       stepper.step(-STEPS/8);
       delay(500);
       break;
     case 'b':
-      Serial.println("Adjusting Camera by 45 deg CW...");
+      Serial.println("Adjusting Camera by 45 deg CW...\n");
       stepper.step(STEPS/8);
       delay(500);
       break;
     case '5':
-      Serial.println("Capturing images...");
+      Serial.println("Capturing images...\n");
       delay(500);
       GetImages();
       break;
     case '6':
-      Serial.println("Closing...");
+      Serial.println("Closing...\n");
       break;
     default:
-      Serial.println("Invalid command!");
+      Serial.println("Invalid command!\n");
       break;
   }
 }
