@@ -145,7 +145,7 @@ void loop() {//main loop
       break;
     case '6':
       Serial.println("Closing...");
-      exit(1);
+      break;
     default:
       Serial.println("Invalid command!");
       break;
