@@ -120,22 +120,22 @@ void loop() {//main loop
       break;
     case '2':
       Serial.println("Deploying Camera...\n");
-      stepper.step(-STEPS/4);
+      stepper.step(-STEPS/6);
       delay(500);
       break;
     case '3':
       Serial.println("Closing Camera...\n");
-      stepper.step(STEPS/4);
+      stepper.step(STEPS/6);
       delay(500);
       break;
     case 'a':
-      Serial.println("Adjusting Camera by 45 deg CCW...\n");
-      stepper.step(-STEPS/8);
+      Serial.println("Adjusting Camera by 30 deg CCW...\n");
+      stepper.step(-STEPS/12);
       delay(500);
       break;
     case 'b':
-      Serial.println("Adjusting Camera by 45 deg CW...\n");
-      stepper.step(STEPS/8);
+      Serial.println("Adjusting Camera by 30 deg CW...\n");
+      stepper.step(STEPS/12);
       delay(500);
       break;
     case '5':
@@ -161,14 +161,11 @@ void ShutterStatus() {
   int switch2State = digitalRead(switchPin2);
   
   // Check the state of the switch
-  if ((switch1State == HIGH)&&(switch2State == HIGH)) { 
+  if ((switch1State == LOW)&&(switch2State == HIGH)) { 
     Serial.println("Shutter is open");
     
-  } else if ((switch1State == LOW)&&(switch2State == LOW)) {
+  } else if ((switch1State == HIGH)&&(switch2State == LOW)) {
     Serial.println("Shutter is closed");
-    
-  } else if (((switch1State == LOW)&&(switch2State == HIGH))||((switch1State == HIGH)&&(switch2State == LOW))) {
-    Serial.println("Shutter is partially open");
     
   }
   
