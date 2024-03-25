@@ -17,7 +17,7 @@ def display_menu():
     print("1. Check Shutter Status\n")
     print("2. Open Shutter\n")
     print("3. Close Shutter\n")
-    print("4. Adjust shutter by 45 degrees\n")
+    print("4. Adjust shutter by 30 degrees\n")
     print("5. Take images\n")
     print("6. Exit program\n")
 
@@ -78,7 +78,7 @@ def capture_images():
 def manual_shutter_adjustment():
     clear_screen()
     while True:
-        direction = input("4. Adjust shutter by 45 degrees\n\na. Counter-clockwise\nb. Clockwise: \n\n")
+        direction = input("4. Adjust shutter by 30 degrees\n\na. Counter-clockwise\nb. Clockwise: \n\n")
         if direction == 'a':
             ser.write(b'a')  # Send command to Arduino for anticlockwise adjustment
         elif direction == 'b':
