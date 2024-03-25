@@ -128,12 +128,12 @@ void loop() {//main loop
       stepper.step(STEPS/4);
       delay(500);
       break;
-    case 'w':
+    case 'a':
       Serial.println("Adjusting Camera by 45 deg CCW...");
       stepper.step(-STEPS/8);
       delay(500);
       break;
-    case 's':
+    case 'b':
       Serial.println("Adjusting Camera by 45 deg CW...");
       stepper.step(STEPS/8);
       delay(500);
