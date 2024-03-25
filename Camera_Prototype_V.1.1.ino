@@ -144,7 +144,6 @@ void loop() {//main loop
       GetImages();
       break;
     case '6':
-      closeFunction();
       Serial.println("Closing...");
       exit(1);
     default:
