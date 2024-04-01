@@ -24,7 +24,7 @@ const int switchPin2 = 4;
 Stepper stepper(STEPS, 9, 10, 12, 13);
 //—-------------------------------------------------------------------------------------------------------
 Adafruit_MLX90640 mlx;
-float frame[24*32]; // buffer for full frame of temperatures
+float frame[32*24]; // buffer for full frame of temperatures
 
 // uncomment *one* of the below
 #define PRINT_TEMPERATURES
@@ -83,7 +83,7 @@ void setup() {// Setup pins
   }
 
 
-  mlx.setRefreshRate(MLX90640_16_HZ);
+  mlx.setRefreshRate(MLX90640_4_HZ);
   Serial.print("Current frame rate: ");
   mlx90640_refreshrate_t rate = mlx.getRefreshRate();
   switch (rate) {
