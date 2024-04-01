@@ -15,7 +15,7 @@
 
 // Define the pin connected to the SPDT switch
 const int switchPin1 = 7; 
-const int switchPin2 = 5;
+const int switchPin2 = 4;
 //—-------------------------------------------------------------------------------------------------------
 #define STEPS 200
 // create an instance of the stepper class, specifying
