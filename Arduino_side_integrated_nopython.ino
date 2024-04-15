@@ -27,8 +27,8 @@ Adafruit_MLX90640 mlx;
 float frame[32*24]; // buffer for full frame of temperatures
 
 // uncomment *one* of the below
-//#define PRINT_TEMPERATURES
-#define PRINT_ASCIIART
+#define PRINT_TEMPERATURES
+//#define PRINT_ASCIIART
 //—-------------------------------------------------------------------------------------------------------
 // <variables for itsybitsy><TBD>
 //—-------------------------------------------------------------------------------------------------------
@@ -57,47 +57,47 @@ void setup() {// Setup pins
   // Initialize IR camera
   mlx.begin(MLX90640_I2CADDR_DEFAULT, &Wire);
 
-  Serial.print("Serial number: ");
-  Serial.print(mlx.serialNumber[0], HEX);
-  Serial.print(mlx.serialNumber[1], HEX);
-  Serial.println(mlx.serialNumber[2], HEX);
+  // Serial.print("Serial number: ");
+  // Serial.print(mlx.serialNumber[0], HEX);
+  // Serial.print(mlx.serialNumber[1], HEX);
+  // Serial.println(mlx.serialNumber[2], HEX);
 
 
   //mlx.setMode(MLX90640_INTERLEAVED);
   mlx.setMode(MLX90640_CHESS);
-  Serial.print("Current mode: ");
-  if (mlx.getMode() == MLX90640_CHESS) {
-    Serial.println("Chess");
-  } else {
-    Serial.println("Interleave");
-  }
+  // Serial.print("Current mode: ");
+  // if (mlx.getMode() == MLX90640_CHESS) {
+  //   Serial.println("Chess");
+  // } else {
+  //   Serial.println("Interleave");
+  // }
 
 
   mlx.setResolution(MLX90640_ADC_18BIT);
-  Serial.print("Current resolution: ");
-  mlx90640_resolution_t res = mlx.getResolution();
-  switch (res) {
-    case MLX90640_ADC_16BIT: Serial.println("16 bit"); break;
-    case MLX90640_ADC_17BIT: Serial.println("17 bit"); break;
-    case MLX90640_ADC_18BIT: Serial.println("18 bit"); break;
-    case MLX90640_ADC_19BIT: Serial.println("19 bit"); break;
-  }
+  // Serial.print("Current resolution: ");
+  // mlx90640_resolution_t res = mlx.getResolution();
+  // switch (res) {
+  //   case MLX90640_ADC_16BIT: Serial.println("16 bit"); break;
+  //   case MLX90640_ADC_17BIT: Serial.println("17 bit"); break;
+  //   case MLX90640_ADC_18BIT: Serial.println("18 bit"); break;
+  //   case MLX90640_ADC_19BIT: Serial.println("19 bit"); break;
+  // }
 
 
   mlx.setRefreshRate(MLX90640_4_HZ);
-  Serial.print("Current frame rate: ");
-  mlx90640_refreshrate_t rate = mlx.getRefreshRate();
-  switch (rate) {
-    case MLX90640_0_5_HZ: Serial.println("0.5 Hz"); break;
-    case MLX90640_1_HZ: Serial.println("1 Hz"); break;
-    case MLX90640_2_HZ: Serial.println("2 Hz"); break;
-    case MLX90640_4_HZ: Serial.println("4 Hz"); break;
-    case MLX90640_8_HZ: Serial.println("8 Hz"); break;
-    case MLX90640_16_HZ: Serial.println("16 Hz"); break;
-    case MLX90640_32_HZ: Serial.println("32 Hz"); break;
-    case MLX90640_64_HZ: Serial.println("64 Hz"); break;
-  }
-//—-------------------------------------------------------------------------------------------------------
+//   Serial.print("Current frame rate: ");
+//   mlx90640_refreshrate_t rate = mlx.getRefreshRate();
+//   switch (rate) {
+//     case MLX90640_0_5_HZ: Serial.println("0.5 Hz"); break;
+//     case MLX90640_1_HZ: Serial.println("1 Hz"); break;
+//     case MLX90640_2_HZ: Serial.println("2 Hz"); break;
+//     case MLX90640_4_HZ: Serial.println("4 Hz"); break;
+//     case MLX90640_8_HZ: Serial.println("8 Hz"); break;
+//     case MLX90640_16_HZ: Serial.println("16 Hz"); break;
+//     case MLX90640_32_HZ: Serial.println("32 Hz"); break;
+//     case MLX90640_64_HZ: Serial.println("64 Hz"); break;
+//   }
+// //—-------------------------------------------------------------------------------------------------------
 // <setup for itsybitsy>
 //—-------------------------------------------------------------------------------------------------------
 // <setup for miscellaneous>
@@ -108,6 +108,8 @@ void setup() {// Setup pins
 //----------------------------------------------Main loop-----------------------------------------------
 
 void loop() {//main loop
+
+Serial.println("Welcome to SpaceWorks Team #1 IR Camera! What would you like to do?\n\n1. Check Shutter status\n2. Open shutter\n3. Close shutter\n4. Rotate shutter by 30 deg CCW\n5. Rotate shutter by 30 deg CW\n6. Capture 2 images");
 
 // Read the incoming byte
 //  char command = Serial.read();
@@ -131,13 +133,13 @@ void loop() {//main loop
       ShutterStatus();
       break;
     case 2:
-      Serial.println("Deploying Camera...\n");
+      Serial.println("Opening shutter...\n");
       digitalWrite(11, HIGH);
       stepper.step(STEPS/6);
       delay(500);
       break;
     case 3:
-      Serial.println("Closing Camera...\n");
+      Serial.println("Closing shutter...\n");
       digitalWrite(11, HIGH);
       stepper.step(-STEPS/6);
       delay(500);
@@ -145,27 +147,30 @@ void loop() {//main loop
     case 4:
       Serial.println("Adjusting Camera by 30 deg CCW...\n");
       digitalWrite(11, HIGH);
-      stepper.step(-STEPS/12);
+      stepper.step(STEPS/12);
       delay(500);
       break;
     case 5:
       Serial.println("Adjusting Camera by 30 deg CW...\n");
       digitalWrite(11, HIGH);
-      stepper.step(STEPS/12);
+      stepper.step(-STEPS/12);
       delay(500);
       break;
     case 6:
       Serial.println("Capturing images...\n");
       delay(500);
-      GetImages();
+      for(int i=0;i<2;i++)
+      {
+        GetImages();
+        delay(200);
+      }
       break;
-    case 7:
-      Serial.println("Closing...\n");
-      break;
+
     default:
       Serial.println("Invalid command!\n");
       break;
   }
+  delay(3000);
 }
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -211,7 +216,7 @@ delay(500);
       float t = frame[h*32 + w];
 #ifdef PRINT_TEMPERATURES
       Serial.print(t, 1);
-      Serial.print(", ");
+      Serial.print(",");
 #endif
 #ifdef PRINT_ASCIIART
       char c = '&';
@@ -233,4 +238,4 @@ delay(500);
 //—-------------------------------------------------------------------------------------------------------
 // <function definition for itsybitsy>
 //—-------------------------------------------------------------------------------------------------------
-// <function definition for miscellaneous>
+// <function definition for miscellaneous>z
