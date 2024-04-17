@@ -18,7 +18,7 @@ def capture_images():
         if not os.path.exists('thermal_images'):
             os.makedirs('thermal_images')
 
-        for i in range(1, 5):
+        for i in range(1, 45):
             line = getValue()
             line = line.replace(" ", "")
             
